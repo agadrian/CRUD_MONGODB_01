@@ -1,5 +1,10 @@
 package org.example
 
+import org.example.conexion.MongoDBConexion
+import org.example.gestor.GestorJuegos
+import org.example.utils.Consola
+import org.example.utils.Menu
+
 fun main() {
     val consola = Consola()
 

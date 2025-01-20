@@ -1,9 +1,9 @@
-package org.example
+package org.example.gestor
 
 import com.mongodb.client.MongoCollection
 import com.mongodb.client.model.Filters
 import org.bson.Document
-
+import org.example.utils.Consola
 
 
 class GestorJuegos(
@@ -83,9 +83,7 @@ class GestorJuegos(
         obtenerJuegos()
 
         val tituloAModificar = consola.pedirString("Introduce el título del juego que quieres modificar:")
-
         val filter = Filters.eq("titulo", tituloAModificar)
-
         val juego = collection.find(filter)
 
         if (juego.any()) {
@@ -97,7 +95,6 @@ class GestorJuegos(
         }else{
             println("No existe el juego con el título $tituloAModificar")
         }
-
     }
 
 

@@ -1,4 +1,7 @@
-package org.example
+package org.example.utils
+
+import org.example.gestor.GestorJuegos
+import org.example.conexion.MongoDBConexion
 
 
 /**
