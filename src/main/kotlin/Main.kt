@@ -16,6 +16,7 @@ fun main() {
         menu.menuPrincipal()
     } catch (e: Exception) {
         println("ERROR - (${e.message})")
+        MongoDBConexion.cerrarConexion()
     }
 }
 
