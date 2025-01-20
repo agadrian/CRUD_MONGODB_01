@@ -11,16 +11,18 @@ class GestorJuegos(
     private val consola: Consola
 ) {
 
+    /**
+     * Pide datos para crear un nuevo juego.
+     * @param paraUpdate: Boolean que sirve para especificar si los datos se pediran para crear o updatear un juego.
+     * @return Document: Un documento, incluyendo o no el titulo del juego.
+     */
     private fun pedirDatos(paraUpdate: Boolean = false): Document {
         println("*** DATOS JUEGOS ***")
 
         // Dependiendo de ssi es para update o para crear unon nuevo, pido el titulo o no (para no duplicar funciones)
         val titulo = if (!paraUpdate) consola.pedirString("Introduce título: ") else null
-
         val genero = consola.pedirString("Introduce género: ")
-
         val precio = consola.pedirDouble("Introduce precio: ")
-
         val fechaLanz = consola.pedirFecha("Introduce fecha lanzamiento (DD/MM/AAAA) ó vacio para la de hoy: ")
 
         // Dependiendo de si es para update o no, devuelvo el titulo o no.
@@ -39,6 +41,9 @@ class GestorJuegos(
     }
 
 
+    /**
+     * Resgistra un juego en la base de datos comprobando si ya existe o no
+     */
     fun registrarJuego(){
         val doc = pedirDatos()
         val titulo = doc.getString("titulo")
@@ -55,6 +60,9 @@ class GestorJuegos(
     }
 
 
+    /**
+     * Obtiene el listado de juegos de la BD y llama a la funcion correspondiente para imprimirla
+     */
     fun obtenerJuegos(){
         println("\n** LISTADO DE JUEGOS **")
         collection.find().forEach { doc ->
@@ -63,6 +71,9 @@ class GestorJuegos(
     }
 
 
+    /**
+     * Obtiene el listado de jeugos filtrados por género y la muestra
+     */
     fun obtenerPorGenero(){
         val genero = consola.pedirString("Introduce género a mostrar: ")
         val filter = Filters.eq("genero", genero)
@@ -79,6 +90,9 @@ class GestorJuegos(
     }
 
 
+    /**
+     * Modifica los datos de un juego exceptuando la id y su título, que es el usado para buscar el juego a editar.
+     */
     fun modificarJuego(){
         obtenerJuegos()
 
@@ -98,6 +112,9 @@ class GestorJuegos(
     }
 
 
+    /**
+     * Elimina todos los juegos de un género concreto.
+     */
     fun eliminarPorGenero(){
         val genero = consola.pedirString("Introduce género a borrar: ")
         val filter = Filters.eq("genero", genero)
